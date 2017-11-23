@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../service/student.service';
 import { Student, IStudent } from '../Model/student';
 import { NgModel } from '@angular/forms';
+import { debug } from 'util';
 
 @Component({
   selector: 'app-student',
