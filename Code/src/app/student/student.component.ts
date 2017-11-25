@@ -73,8 +73,8 @@ export class StudentComponent implements OnInit {
 
   getStudent = function (studentId) {
     this._service.getStudent(studentId).
-      then(student => {
-        this._oldStudent = student;
+      then(students => {
+        this._oldStudent = students[0];
       }).catch(error => {
         console.error(error);
         alert(error.Message);
