@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../service/student.service';
-import { Student, IStudent } from '../Model/student';
+import { Student, IStudent } from '../model/student';
 import { NgModel } from '@angular/forms';
 import { debug } from 'util';
 

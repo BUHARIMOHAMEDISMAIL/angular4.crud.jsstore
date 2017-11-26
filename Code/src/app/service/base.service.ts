@@ -9,7 +9,7 @@ export class BaseService {
     let That = this,
       DatabaseName = 'Students';
 
-    JsStore.isDbExist(DatabaseName, function (isExist) {
+    JsStore.isDbExist(DatabaseName).then(isExist => {
       if (isExist) {
         That._connection.openDb(DatabaseName);
       }
@@ -17,11 +17,10 @@ export class BaseService {
         const DataBase = That.getDatabase();
         That._connection.createDb(DataBase);
       }
-    },
-      function (err) {
-        //this will be fired when indexedDB is not supported.
-        alert(err.Message);
-      });
+    }).catch(err => {
+      // this will be fired when indexedDB is not supported.
+      alert(err.Message);
+    });
   }
 
   private getDatabase = function () {
