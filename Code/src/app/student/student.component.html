@@ -16,18 +16,19 @@
         <option value="m">Male</option>
         <option value="f">FeMale</option>
       </select>
-      <td>
-        <input type="text" [(ngModel)]="_newStudent.Country" />
-      </td>
-      <td>
-        <input type="text" [(ngModel)]="_newStudent.City" />
-      </td>
-      <td>
-        <button (click)="addStudent()">Add</button>
-      </td>
-      <td>
-        <button (click)="clearNewStudent()">Cancel</button>
-      </td>
+    </td>
+    <td>
+      <input type="text" [(ngModel)]="_newStudent.Country" />
+    </td>
+    <td>
+      <input type="text" [(ngModel)]="_newStudent.City" />
+    </td>
+    <td>
+      <button (click)="addStudent()">Add</button>
+    </td>
+    <td>
+      <button (click)="clearNewStudent()">Cancel</button>
+    </td>
   </tr>
   <tr *ngFor="let student of _students" [attr.data-id]="student.Id">
     <td>
