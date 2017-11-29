@@ -1,17 +1,17 @@
+import { Injectable } from '@angular/core';
 import { Instance } from 'JsStore';
 declare var JsStore: any;
 
-export class BaseService {
+@Injectable()
+export class CommonService {
   _connection: Instance;
-
+  _dbName = 'Students';
   constructor() {
     this._connection = new JsStore.Instance();
-    let That = this,
-      DatabaseName = 'Students';
-
-    JsStore.isDbExist(DatabaseName).then(isExist => {
+    let That = this;
+    JsStore.isDbExist(this._dbName).then(isExist => {
       if (isExist) {
-        That._connection.openDb(DatabaseName);
+        That._connection.openDb(That._dbName);
       }
       else {
         const DataBase = That.getDatabase();
@@ -53,7 +53,7 @@ export class BaseService {
       ]
     };
     const DataBase = {
-      Name: 'Students',
+      Name: this._dbName,
       Tables: [TblStudent]
     };
 

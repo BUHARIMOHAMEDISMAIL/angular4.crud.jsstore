@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { BaseService } from '../Service/base.service';
+import { CommonService } from '../service/common.service';
 
 @Injectable()
-export class StudentService extends BaseService {
-  constructor() {
-    super();
+export class StudentService {
+  _connection;
+  constructor(service: CommonService) {
+    this._connection = service._connection;
   }
 
   getStudents = function () {
