@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Instance } from 'JsStore';
-declare var JsStore: any;
+declare var JsStore;
 
 @Injectable()
 export class CommonService {
@@ -8,22 +8,22 @@ export class CommonService {
   _dbName = 'Students';
   constructor() {
     this._connection = new JsStore.Instance();
-    let That = this;
-    JsStore.isDbExist(this._dbName).then(isExist => {
+    JsStore.isDbExist(this._dbName as any).then(isExist => {
       if (isExist) {
-        That._connection.openDb(That._dbName);
+        this._connection.openDb(this._dbName, null, null);
       }
       else {
-        const DataBase = That.getDatabase();
-        That._connection.createDb(DataBase);
+        const DataBase = this.getDatabase();
+        this._connection.createDb(DataBase, null, null);
       }
     }).catch(err => {
       // this will be fired when indexedDB is not supported.
-      alert(err.Message);
+      console.error(err);
+      alert(err._message);
     });
   }
 
-  private getDatabase = function () {
+  private getDatabase() {
     const TblStudent = {
       Name: 'Student',
       Columns: [{
@@ -34,21 +34,22 @@ export class CommonService {
       {
         Name: 'Name',
         NotNull: true,
-        DataType: 'string'
+        DataType: JsStore.Data_Type.String
       },
       {
         Name: 'Gender',
-        DataType: 'string',
+        DataType: JsStore.Data_Type.String,
         Default: 'male'
       },
       {
         Name: 'Country',
         NotNull: true,
-        DataType: 'string'
+        DataType: JsStore.Data_Type.String
       },
       {
         Name: 'City',
-        NotNull: true
+        NotNull: true,
+        DataType: JsStore.Data_Type.String
       }
       ]
     };

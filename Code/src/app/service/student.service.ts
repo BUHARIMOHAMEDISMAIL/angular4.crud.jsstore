@@ -8,21 +8,21 @@ export class StudentService {
     this._connection = service._connection;
   }
 
-  getStudents = function () {
+  getStudents() {
     // jsstore returns promise, when you dont specify OnSuccess
     return this._connection.select({
       From: 'Student'
     });
   }
 
-  addStudent = function (student) {
+  addStudent(student) {
     return this._connection.insert({
       Into: 'Student',
       Values: [student]
     });
   }
 
-  deleteStudent = function (studentId) {
+  deleteStudent(studentId) {
     return this._connection.delete({
       From: 'Student',
       Where: {
@@ -31,7 +31,7 @@ export class StudentService {
     });
   }
 
-  updateStudent = function (studentId, updateValue) {
+  updateStudent(studentId, updateValue) {
     return this._connection.update({
       In: 'Student',
       Where: {
@@ -41,7 +41,7 @@ export class StudentService {
     });
   }
 
-  getStudent = function (studentId) {
+  getStudent(studentId) {
     return this._connection.select({
       From: 'Student',
       Where: {
