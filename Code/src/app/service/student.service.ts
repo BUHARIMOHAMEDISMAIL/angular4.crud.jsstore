@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { CommonService } from '../service/common.service';
+import { Instance } from 'JsStore';
 
 @Injectable()
 export class StudentService {
-  _connection;
+  _connection: Instance;
   constructor(service: CommonService) {
     this._connection = service._connection;
   }
