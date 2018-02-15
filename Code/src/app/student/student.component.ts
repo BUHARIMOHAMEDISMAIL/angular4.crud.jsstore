@@ -25,7 +25,7 @@ export class StudentComponent implements OnInit {
     this.getStudents();
   }
 
-  getStudents = function () {
+  getStudents() {
     this._service.getStudents().
       then(students => {
         this._students = students;
@@ -35,7 +35,7 @@ export class StudentComponent implements OnInit {
       });
   }
 
-  addStudent = function () {
+  addStudent() {
     this._service.addStudent(this._newStudent).
       then(rowsAdded => {
         if (rowsAdded > 0) {
@@ -49,12 +49,12 @@ export class StudentComponent implements OnInit {
       });
   }
 
-  deleteStudent = function (studentId) {
+  deleteStudent(studentId) {
     this._service.deleteStudent(studentId).
       then(rowsDeleted => {
         if (rowsDeleted > 0) {
-          let Index = this._students.findIndex(student => student.Id === studentId);
-          this._students.splice(Index, 1);
+          const index = this._students.findIndex(student => student.Id === studentId);
+          this._students.splice(index, 1);
           alert('Successfully deleted');
         }
       }).catch(error => {
@@ -63,15 +63,15 @@ export class StudentComponent implements OnInit {
       });
   }
 
-  clearNewStudent = function () {
+  clearNewStudent() {
     this._newStudent = new Student();
   }
 
-  clearOldStudent = function () {
+  clearOldStudent() {
     this._oldStudent = new Student();
   }
 
-  getStudent = function (studentId) {
+  getStudent(studentId) {
     this._service.getStudent(studentId).
       then(students => {
         this._oldStudent = students[0];
@@ -81,18 +81,18 @@ export class StudentComponent implements OnInit {
       });
   }
 
-  updateStudent = function () {
-    let UpdatedValue = {
+  updateStudent() {
+    const UpdatedValue = {
       Name: this._oldStudent.Name,
       Gender: this._oldStudent.Gender,
       Country: this._oldStudent.Country,
       City: this._oldStudent.City
-    }
+    };
     this._service.updateStudent(this._oldStudent.Id, UpdatedValue).
       then(rowsUpdated => {
         if (rowsUpdated > 0) {
-          let Index = this._students.findIndex(student => student.Id === this._oldStudent.Id);
-          this._students[Index] = this._oldStudent;
+          const index = this._students.findIndex(student => student.Id === this._oldStudent.Id);
+          this._students[index] = this._oldStudent;
           this.clearOldStudent();
           alert('Successfully updated');
         }

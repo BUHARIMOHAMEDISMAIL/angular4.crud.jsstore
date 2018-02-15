@@ -24,7 +24,7 @@ export class StudentService {
   }
 
   deleteStudent(studentId) {
-    return this._connection.delete({
+    return this._connection.remove({
       From: 'Student',
       Where: {
         Id: studentId
