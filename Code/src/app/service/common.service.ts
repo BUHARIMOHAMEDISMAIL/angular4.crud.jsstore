@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Instance } from 'JsStore';
+import { Instance, IDataBaseOption, ITableOption } from 'JsStore';
 declare var JsStore;
 
 @Injectable()
@@ -10,11 +10,11 @@ export class CommonService {
     this._connection = new JsStore.Instance();
     JsStore.isDbExist(this._dbName as any).then(isExist => {
       if (isExist) {
-        this._connection.openDb(this._dbName, null, null);
+        this._connection.openDb(this._dbName);
       }
       else {
         const DataBase = this.getDatabase();
-        this._connection.createDb(DataBase, null, null);
+        this._connection.createDb(DataBase);
       }
     }).catch(err => {
       // this will be fired when indexedDB is not supported.
@@ -52,11 +52,11 @@ export class CommonService {
         DataType: JsStore.Data_Type.String
       }
       ]
-    };
+    } as ITableOption;
     const DataBase = {
       Name: this._dbName,
       Tables: [TblStudent]
-    };
+    } as IDataBaseOption;
 
     return DataBase as any;
   }
