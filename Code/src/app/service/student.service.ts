@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CommonService } from '../service/common.service';
 import { Instance } from 'JsStore';
+import { IPromise } from 'q';
+import { IStudent } from 'app/model/student';
 
 @Injectable()
 export class StudentService {
@@ -42,12 +44,29 @@ export class StudentService {
     });
   }
 
-  getStudent(studentId) {
+  /**
+   *  Get student by studentId
+   *
+   * @param {any} studentId
+   * @returns {Promise<IStudent>}
+   * @memberof StudentService
+   */
+  getStudent(studentId): Promise<IStudent> {
     return this._connection.select({
       From: 'Student',
       Where: {
         Id: studentId
       }
     });
+  }
+
+  /**
+   * clear students table
+   *
+   * @returns {Promise<null>}
+   * @memberof StudentService
+   */
+  clearStudents(): Promise<null> {
+    return this._connection.clear('Student');
   }
 }

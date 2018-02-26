@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../service/student.service';
 import { Student, IStudent } from '../model/student';
 import { NgModel } from '@angular/forms';
-import { debug } from 'util';
+import { debug, error } from 'util';
 
 @Component({
   selector: 'app-student',
@@ -31,7 +31,7 @@ export class StudentComponent implements OnInit {
         this._students = students;
       }).catch(error => {
         console.error(error);
-        alert(error.Message);
+        alert(error._message);
       });
   }
 
@@ -45,7 +45,7 @@ export class StudentComponent implements OnInit {
         }
       }).catch(error => {
         console.error(error);
-        alert(error.Message);
+        alert(error._message);
       });
   }
 
@@ -59,12 +59,22 @@ export class StudentComponent implements OnInit {
         }
       }).catch(error => {
         console.error(error);
-        alert(error.Message);
+        alert(error._message);
       });
   }
 
   clearNewStudent() {
     this._newStudent = new Student();
+  }
+
+  clearStudents() {
+    this._service.clearStudents().
+      then(() => {
+        this._students = [];
+      }).catch(error => {
+        console.error(error);
+        alert(error._message);
+      });
   }
 
   clearOldStudent() {
@@ -77,7 +87,7 @@ export class StudentComponent implements OnInit {
         this._oldStudent = students[0];
       }).catch(error => {
         console.error(error);
-        alert(error.Message);
+        alert(error._message);
       });
   }
 
@@ -98,7 +108,7 @@ export class StudentComponent implements OnInit {
         }
       }).catch(error => {
         console.error(error);
-        alert(error.Message);
+        alert(error._message);
       });
   }
 }
